@@ -22,17 +22,20 @@ tr '\n' '|' <$t1 | sed -E 's/[^[:alnum:]]+/\n&\n/g' >$t2
 
 
 # leser linje for linje og hasjer linjer uten bokstaver || tall
-while IFS="" read -r p || [ -n "$p" ]; do
-
-    if [[ $p =~ [^[:alpha:]] ]]; then
-        echo -n $p >./$1/$(echo -n $p | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
-        echo -n $p | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
+IFS=""
+cat $t2 |
+while read data; 
+do
+    echo $data
+    if [[ $data =~ [^[:alpha:]] ]]; then
+        echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
+        echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
 
     else
-        echo $p >>$ut
+        echo $data >>$ut
     fi
 
-done <$t2
+done
 
 # sletter 
 rm t1.temp

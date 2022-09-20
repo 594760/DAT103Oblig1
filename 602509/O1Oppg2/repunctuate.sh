@@ -28,7 +28,7 @@ done < ../task3.txt
 cd ..
 
 #tr -s '\n' < task3.txt
-cat task3.txt | tr '\n' ' ' > test.txt
+cat task3.txt | tr -d '\n' > test.txt
 
 echo "------------------- test.txt -------------------"
 cat test.txt
