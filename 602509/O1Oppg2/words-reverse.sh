@@ -9,10 +9,9 @@ if [[ -f task2.txt ]]; then
 
 else
 
+
     #TODO word-reverse-11
 
     /repunctuate.sh $mappe
 
 fi
-
-
