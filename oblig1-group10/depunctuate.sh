@@ -15,7 +15,10 @@ ut=task2.txt
 mkdir -p $1
 
 # kopierer inn standard input
-cat org.txt >t1.temp
+echo "Read from following file:"
+read input
+
+cat $input > $t1
 
 # fjerner linjeshift og substituerer med "|"
 tr '\n' '|' <$t1 | sed -E 's/[^[:alnum:]]+/\n&\n/g' >$t2
@@ -26,7 +29,7 @@ IFS=""
 cat $t2 |
 while read data; 
 do
-    echo $data
+    
     if [[ $data =~ [^[:alpha:]] ]]; then
         echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
         echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
