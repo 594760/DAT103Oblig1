@@ -1,17 +1,17 @@
 #!/bin/bash
 
-./depunctuate.sh test
+#./depunctuate.sh test
 
-while getopts 'b:' OPTION; do
+while getopts ':b' OPTION; do
   case "$OPTION" in
     b)
       echo "--bypass"
       ;;
-    ?)
-      echo "uten option"
-      ;;
+    \?) # Invalid option
+    echo "Error: Invalid option"
+    exit;;
   esac
 done
 shift "$(($OPTIND -1))"
-
-./repunctuate test
+echo "done"
+#./repunctuate test
