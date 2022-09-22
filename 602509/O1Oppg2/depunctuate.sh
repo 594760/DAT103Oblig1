@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# lager filer
+# fjerner gammel output fil
 rm -f task2.txt
+
+# lager nye filer
 touch t1.temp
 touch t2.temp
 touch task2.txt
@@ -38,7 +40,19 @@ cat $t2 |
     while read data; do
 
         if [[ $data =~ [^[:alpha:]] ]]; then
-            echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
+
+            if [[ -f "./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt" ]]; then
+                echo "filen finnes"
+
+                #TODO legge til logikk for å kontrollere innhold på fil og for å ikke å lage fil hvis den allerede har rett innhold
+
+            else
+
+                echo "ingen slik fil"
+                echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
+
+            fi
+
             echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
 
         else
