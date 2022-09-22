@@ -5,13 +5,14 @@ mappe=$(echo $RANDOM | md5sum | sed -E 's/[^[:alnum:]]+//g')
 ./depunctuate.sh $mappe
 
 if [[ -f task2.txt ]]; then
-    exit 0
-
-else
-
+ 
+    echo "repunct"
     #TODO word-reverse-11
 
-    /repunctuate.sh $mappe
+    ./repunctuate.sh $mappe
+else
+   echo "exit"
+    exit 0
 
 fi
 

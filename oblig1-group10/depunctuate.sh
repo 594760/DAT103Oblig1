@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # lager filer
-rm -f  task2.txt
+rm -f task2.txt
 touch t1.temp
 touch t2.temp
 touch task2.txt
@@ -19,34 +19,34 @@ echo "Read from following file:"
 read input
 
 if [[ -f "$input" ]]; then
-    cat $input > $t1
+    cat $input >$t1
 else
-   echo "repunctuate: filen finnes ikke, script avsluttes" 
-   exit 1
+    # sletter
+    rm t1.temp
+    rm t2.temp
+
+    echo "repunctuate: filen finnes ikke, script avsluttes"
+    exit 1
 fi
-
-
 
 # fjerner linjeshift og substituerer med "|"
 tr '\n' '|' <$t1 | sed -E 's/[^[:alnum:]]+/\n&\n/g' >$t2
 
-
 # leser linje for linje og hasjer linjer uten bokstaver || tall
 IFS=""
 cat $t2 |
-while read data; 
-do
-    
-    if [[ $data =~ [^[:alpha:]] ]]; then
-        echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
-        echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
+    while read data; do
 
-    else
-        echo $data >>$ut
-    fi
+        if [[ $data =~ [^[:alpha:]] ]]; then
+            echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
+            echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g' >>$ut
 
-done
+        else
+            echo $data >>$ut
+        fi
 
-# sletter 
+    done
+
+# sletter
 rm t1.temp
 rm t2.temp
