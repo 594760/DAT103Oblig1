@@ -24,8 +24,8 @@ else
     # sletter
     rm t1.temp
     rm t2.temp
-
-    echo "repunctuate: filen finnes ikke, script avsluttes"
+    rm $ut
+    echo "depunctuate: Hash mappen finnes ikke, script avsluttes"
     exit 1
 fi
 

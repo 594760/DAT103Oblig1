@@ -12,15 +12,14 @@ touch t3.temp
 t3=t3.temp
 
 # kopierer outut fra depunctuate til t3
-cat task2.txt > $t3
+cat task2.txt >$t3
 
 # bytter arbeidskatalog
 cd $1
 
 # leser linje for linje og hasjer linjer uten bokstaver || tall
 while IFS="" read -r p || [ -n "$p" ]; do
-    for f in ./*
-    do
+    for f in ./*; do
         str=${f:2}
         hs=${str::-4}
 
@@ -28,13 +27,13 @@ while IFS="" read -r p || [ -n "$p" ]; do
             sed -i "s/$p/$(cat $f)/" ../$t3
         fi
 
-        
     done
-done < ../$t3
+
+done <../$t3
 cd ..
 
 # fjerner linjeskift og bytter | med nye linjeskift
-tr -d '\n' <$t3 | sed 's/|/\n/g' > task3.txt
+tr -d '\n' <$t3 | sed 's/|/\n/g' >task3.txt
 
 # fjerner temp filer
 rm -f $t3
