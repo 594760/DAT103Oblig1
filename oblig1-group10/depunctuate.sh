@@ -42,7 +42,13 @@ cat $t2 |
         if [[ $data =~ [^[:alpha:]] ]]; then
 
             if [[ -f "./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt" ]]; then
-                echo "filen finnes"
+                
+                test="./$1/$(echo -n $data | sha256sum| sed -E 's/[^[:alnum:]]+//g').txt"
+
+                if [[ $data != $(cat $test) ]]; then
+                    echo feil
+                    exit 2
+                fi
 
                 #TODO legge til logikk for å kontrollere innhold på fil og for å ikke å lage fil hvis den allerede har rett innhold
 
