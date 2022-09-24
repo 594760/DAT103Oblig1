@@ -11,8 +11,6 @@ while [ True ]; do
     fi
 done
 
-echo "Flagg = $bpFlagg"
-
 mappe=$(echo $RANDOM | md5sum | sed -E 's/[^[:alnum:]]+//g')
 
 ./depunctuate.sh $mappe
@@ -34,4 +32,5 @@ else
 
 fi
 
+rm -r $mappe
 echo "words-reverse: done"

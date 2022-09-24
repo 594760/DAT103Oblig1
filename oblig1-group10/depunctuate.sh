@@ -27,7 +27,7 @@ else
     rm t1.temp
     rm t2.temp
     rm $ut
-    echo "depunctuate: Hash mappen finnes ikke, script avsluttes"
+    echo "depunctuate: File dose not exsist, exiting the script."
     exit 1
 fi
 
@@ -42,19 +42,17 @@ cat $t2 |
         if [[ $data =~ [^[:alpha:]] ]]; then
 
             if [[ -f "./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt" ]]; then
-                
-                test="./$1/$(echo -n $data | sha256sum| sed -E 's/[^[:alnum:]]+//g').txt"
 
-                if [[ $data != $(cat $test) ]]; then
-                    echo feil
-                    exit 2
+                pathToFile="./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt"
+
+                if [[ $data != $(cat $pathToFile) ]]; then
+                    echo "filname does not match hash of content. "
+                    echo "Path to file: $pathToFile"
+                    exit 1
                 fi
-
-                #TODO legge til logikk for å kontrollere innhold på fil og for å ikke å lage fil hvis den allerede har rett innhold
 
             else
 
-                echo "ingen slik fil"
                 echo -n $data >./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt
 
             fi
