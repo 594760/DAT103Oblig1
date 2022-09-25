@@ -17,8 +17,11 @@ ut=task2.txt
 mkdir -p $1
 
 # kopierer inn standard input
-echo "Read from following file:"
+echo "Read from following file:" 
 read input
+
+# denne funker på sanity checken men har ikke fått den til i VS Code terminal
+#cat > $t1
 
 if [[ -f "$input" ]]; then
     cat $input >$t1
@@ -39,12 +42,15 @@ IFS=""
 cat $t2 |
     while read data; do
 
+        # sorterer ut linjer ute bokstaver og tall
         if [[ $data =~ [^[:alpha:]] ]]; then
 
+            # finner ut om filen eksister fra før av
             if [[ -f "./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt" ]]; then
 
                 pathToFile="./$1/$(echo -n $data | sha256sum | sed -E 's/[^[:alnum:]]+//g').txt"
 
+                # kjører vis det er feil med hash filen
                 if [[ $data != $(cat $pathToFile) ]]; then
                     echo "filname does not match hash of content. "
                     echo "Path to file: $pathToFile"
@@ -68,3 +74,6 @@ cat $t2 |
 # sletter
 rm t1.temp
 rm t2.temp
+
+# usikker på om vi må ha denne
+exit 0
