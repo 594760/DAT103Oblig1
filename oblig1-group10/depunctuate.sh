@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# fjerner gammel output fil
-rm -f task2.txt
-
 # lager nye filer
 touch t1.temp
 touch t2.temp
-touch task2.txt
 
 # setter variabler som peker til filene
 t1="t1.temp"
@@ -15,7 +11,6 @@ ut=task2.txt
 
 # lage hash-mappe
 mkdir -p $1
-echo $1
 
 # kopierer inn standard input
 cat > $t1

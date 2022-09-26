@@ -21,9 +21,8 @@ cd $1
 while IFS="" read -r p || [ -n "$p" ]; do
     for f in ./*; do
         str=${f:2}
-        hs=${str::-4}
 
-        if [ "$p" == "$hs" ]; then
+        if [ "$p" == "$str" ]; then
             sed -i "s/$p/$(cat $f)/" ../$t3
         fi
 

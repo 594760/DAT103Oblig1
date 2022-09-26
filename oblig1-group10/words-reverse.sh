@@ -13,7 +13,7 @@ done
 
 mappe=$(echo $RANDOM | md5sum | sed -E 's/[^[:alnum:]]+//g')
 
-./depunctuate.sh $mappe
+./depunctuate.sh $mappe 1>task2.txt
 
 if [[ -f task2.txt ]]; then
 
