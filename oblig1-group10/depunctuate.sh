@@ -8,6 +8,13 @@ touch "t2.temp"
 t1="t1.temp"
 t2="t2.temp"
 
+
+# Sjekker om comand line argumenten er med
+if [$# -le 1]; then
+    echo "Mising comand line argument"
+    exit 1
+fi
+
 # lage hash-mappe
 mkdir -p "$1"
 
@@ -33,8 +40,7 @@ cat "$t2" |
 
                 # kjører vis det er feil med hash filen
                 if [[ "$data" != $(cat $pathToFile) ]]; then
-                    echo "filname does not match hash of content. "
-                    echo "Path to file: $pathToFile"
+                    echo "filname does not match hash of content. Path to file: $pathToFile" &> error.txt
                     exit 1
                 fi
 
