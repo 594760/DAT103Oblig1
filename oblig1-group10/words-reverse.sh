@@ -6,8 +6,9 @@ while [ True ]; do
     if [ "$1" = "--bypass" ]; then
         bpFlagg=True
         shift 1
-    else
-        break
+    elif [ ! -z "$1" ]; then
+        >&2 echo "$1 : Command not found"
+        exit 1
     fi
 done
 
