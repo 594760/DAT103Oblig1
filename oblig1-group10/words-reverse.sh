@@ -2,15 +2,14 @@
 
 # option --bypass
 bpFlagg=False
-while [ True ]; do
-    if [ "$1" = "--bypass" ]; then
-        bpFlagg=True
-        shift 1
-    elif [ ! -z "$1" ]; then
-        >&2 echo "$1 : Command not found"
-        exit 1
-    fi
-done
+
+if [ "$1" = "--bypass" ]; then
+    bpFlagg=True
+elif [ ! -z "$1" ]; then
+    >&2 echo "$1 : Command not found"
+    exit 1
+fi
+
 
 # Lager en random mappe navn til hasene
 mappe=$(echo $RANDOM | md5sum | sed -E 's/[^[:alnum:]]+//g')

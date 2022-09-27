@@ -17,7 +17,7 @@ cat task2.txt > $t3
 # bytter arbeidskatalog
 cd $1
 
-# leser linje for linje og hasjer linjer uten bokstaver || tall
+# leser linje for linje og bytter ut hasher.
 while IFS="" read -r p || [ -n "$p" ]; do
     for f in ./*
     do
