@@ -41,6 +41,9 @@ cat "$t2" |
                 # kjører vis det er feil med hash filen
                 if [[ "$data" != $(cat $pathToFile) ]]; then
                     >&2 echo "filname does not match hash of content. Path to file: $pathToFile"
+                    # Fjerner temp-filer
+                    rm t1.temp
+                    rm t2.temp
                     exit 1
                 fi
 

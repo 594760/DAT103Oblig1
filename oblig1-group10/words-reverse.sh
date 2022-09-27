@@ -35,6 +35,7 @@ if [[ -f task2.txt ]]; then
 # Kjører vis filen fra depuncuate ikke finnes
 else
     >&2 echo "words-reverse: Tekstfil fra depunctuation.sh finnes ikke, script avsluttes"
+    rm -r $mappe
     exit 1
 
 fi
